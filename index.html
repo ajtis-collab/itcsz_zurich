@@ -3,102 +3,179 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ITCSZ Zurich Finale Pitch Order</title>
+  <title>在线查分系统</title>
   <style>
-    .logo {
-    position: fixed;
-    top: 18px;
-    left: 22px;
-    width: 270px;           /* 你可以改成合适的尺寸 */
-    opacity: 0.85;         /* 控制透明度 0~1 */
-    z-index: 100;          /* 确保浮在最上层 */
-    transition: opacity 0.3s ease;
-  }
-  .logo:hover {
-    opacity: 1;            /* 鼠标悬停时更清晰 */
-  }
+    /* ===== 颜色主题（贴近你截图的风格） ===== */
     :root{
-      --bg:#F4F8F9;        /* 深蓝背景 */
-      --card:#FFFFF;      /* 卡片底色 */
-      --muted:#2A3045;     /* 次要文字 */
-      --text:#2A3045;      /* 主要文字 */
-      --accent:#22d3ee;    /* 高亮色 */
-      --ok:#10b981;        /* 成功 */
-      --warn:#f59e0b;      /* 警告 */
-      --err:#ef4444;       /* 错误 */
+      --bg:#f6f7fb;          /* 页面浅灰背景 */
+      --card:#ffffff;        /* 卡片白色 */
+      --border:#e5e7eb;      /* 边框/分割线 */
+      --shadow:0 10px 24px rgba(17,24,39,.08);
+
+      --text:#111827;        /* 主文字深灰 */
+      --muted:#6b7280;       /* 次级文字 */
+      --heading:#0f172a;     /* 标题深蓝 */
+
+      --primary:#c0147b;     /* 品牌洋红（按钮/高亮） */
+      --primary-600:#a01164; /* hover 深色 */
+      --primary-50:#fde7f3;  /* 浅色背景（focus/选中） */
+
+      --accent:#0ea5e9;      /* 次要点缀（可用于链接） */
+      --ok:#10b981;
+      --warn:#f59e0b;
+      --err:#ef4444;
     }
+
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
-      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "PingFang SC","Hiragino Sans GB","Microsoft YaHei","Heiti SC",sans-serif;
-      background:linear-gradient(135deg,#0b1024 0%, #0f172a 60%, #0b1624 100%);
-      color:var(--text); min-height:100dvh; display:flex; align-items:center; justify-content:center; padding:24px;
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans","PingFang SC","Microsoft YaHei",sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      display:flex; align-items:flex-start; justify-content:center;
+      padding:40px 20px;
     }
-    .wrap{width:100%; max-width:880px}
-    .card{background:var(--card); border:1px solid #1f2937; border-radius:16px; padding:24px; box-shadow:0 10px 30px rgba(0,0,0,.35)}
-    h1{margin:0 0 6px; font-size:28px; letter-spacing:.3px}
-    .sub{color:var(--muted); margin-bottom:18px; font-size:14px}
-    .search{
-      position:relative; margin-top:8px;
-      display:flex; gap:10px; align-items:center;
+
+    /* 顶部左侧 LOGO */
+    .logo{
+      position:fixed; top:18px; left:22px;
+      width:120px; height:auto;
+      opacity:.9;
+      z-index:9999;
+      pointer-events:none;     /* 不遮挡点击 */
+      transition:opacity .25s ease;
     }
+    .logo:hover{ opacity:1; }
+
+    /* 布局 */
+    .wrap{ width:100%; max-width:980px; }
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      padding:28px;
+    }
+
+    h1{
+      margin:0 0 6px;
+      font-size:28px;
+      color:var(--heading);
+      letter-spacing:.2px;
+    }
+    .sub{ color:var(--muted); margin-bottom:18px; font-size:14px }
+
+    /* 搜索区 */
+    .search{ position:relative; display:flex; gap:12px; align-items:center }
     .search input{
-      flex:1; padding:14px 16px; border-radius:12px; border:1px solid #223148; background:#0b1222; color:var(--text);
-      outline:none; font-size:16px;
+      flex:1;
+      padding:14px 16px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:#fff;
+      color:var(--text);
+      font-size:16px;
+      outline:none;
+      transition:border-color .15s, box-shadow .15s;
     }
-    .search input:focus{border-color:var(--accent); box-shadow:0 0 0 3px rgba(34,211,238,.15)}
+    .search input:focus{
+      border-color:var(--primary);
+      box-shadow:0 0 0 3px var(--primary-50);
+    }
     .search button{
-      padding:12px 18px; border-radius:12px; border:1px solid #1f2e44; background:linear-gradient(180deg,#13324a,#0e2336);
-      color:#d7faff; cursor:pointer; font-weight:600; letter-spacing:.2px;
+      padding:12px 18px;
+      border-radius:12px;
+      border:0;
+      background:var(--primary);
+      color:#fff;
+      font-weight:700;
+      letter-spacing:.2px;
+      cursor:pointer;
+      transition:filter .15s, background .15s, transform .02s;
+      box-shadow:0 6px 16px rgba(192,20,123,.25);
     }
-    .search button:hover{filter:brightness(1.06)}
-    .hint{color:var(--muted); font-size:12px; margin-top:8px}
+    .search button:hover{ background:var(--primary-600) }
+    .search button:active{ transform:translateY(1px) }
+
+    .hint{ color:var(--muted); font-size:12px; margin-top:8px }
+
+    /* 下拉候选（明亮风格） */
     .dropdown{
       position:absolute; top:100%; left:0; right:0; z-index:50;
-      background:#0b1222; border:1px solid #1f2e44; border-radius:12px; margin-top:8px; overflow:hidden; max-height:280px; overflow-y:auto;
+      margin-top:8px;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:12px;
+      overflow:hidden;
+      max-height:280px; overflow-y:auto;
       display:none;
+      box-shadow:var(--shadow);
     }
-    .dropdown.visible{display:block}
-    .opt{padding:10px 14px; cursor:pointer; border-bottom:1px solid #122036}
-    .opt:last-child{border-bottom:none}
-    .opt:hover, .opt.active{background:#0e1a2d}
-    .muted{color:var(--muted); font-size:12px}
+    .dropdown.visible{ display:block }
+    .opt{
+      padding:10px 14px;
+      cursor:pointer;
+      border-bottom:1px solid var(--border);
+    }
+    .opt:last-child{ border-bottom:none }
+    .opt:hover, .opt.active{
+      background:#fff1f8;              /* 洋红的浅背景 */
+    }
 
-    .result{margin-top:18px; display:none}
-    .row{display:flex; gap:14px; flex-wrap:wrap}
-    .pill{background:#0b1222; border:1px solid #1f2e44; border-radius:999px; padding:8px 12px; font-size:13px}
+    /* 结果区 */
+    .result{ margin-top:18px; display:none }
+    .row{ display:flex; gap:10px; flex-wrap:wrap }
+    .pill{
+      background:#f9fafb;
+      border:1px solid var(--border);
+      color:#374151;
+      border-radius:999px;
+      padding:8px 12px; font-size:13px
+    }
     .score{
-      margin-top:14px; font-size:42px; font-weight:800; letter-spacing:.5px;
-      background:linear-gradient(90deg,#7dd3fc,#22d3ee 40%,#34d399);
-      -webkit-background-clip:text; background-clip:text; color:transparent;
+      margin-top:14px;
+      font-size:42px; font-weight:850; letter-spacing:.2px;
+      color:var(--primary);             /* 分数用品牌色 */
     }
 
-    .loader{display:none; margin-top:18px; align-items:center; gap:12px}
+    /* 加载器 */
+    .loader{ display:none; margin-top:18px; align-items:center; gap:10px }
     .spinner{
       width:18px; height:18px; border-radius:50%;
-      border:3px solid rgba(34,211,238,.15); border-top-color:var(--accent);
+      border:3px solid rgba(192,20,123,.15); border-top-color:var(--primary);
       animation:spin 1s linear infinite;
     }
     @keyframes spin{to{transform:rotate(360deg)}}
-    .err{color:var(--err); margin-top:10px}
-    .footer{margin-top:22px; color:var(--muted); font-size:12px}
-    .kbd{border:1px solid #324055; border-bottom-width:2px; padding:1px 6px; border-radius:6px; background:#0b1222; color:#cbd5e1}
+
+    .err{ color:var(--err); margin-top:10px }
+    .footer{ margin-top:22px; color:var(--muted); font-size:12px }
+    .kbd{
+      border:1px solid var(--border); border-bottom-width:2px;
+      padding:1px 6px; border-radius:6px; background:#fff; color:#374151
+    }
+
     @media (max-width:520px){
-      h1{font-size:24px}
-      .score{font-size:36px}
+      body{ padding-top:80px }          /* 给固定 logo 留空间 */
+      h1{ font-size:24px }
+      .score{ font-size:36px }
     }
   </style>
 </head>
 <body>
+  <!-- 左上角 LOGO（透明 PNG） -->
   <img src="itcsz_logo.png" alt="logo" class="logo" />
-  <div class="wrap">
+
   <div class="wrap">
     <div class="card">
-      <h1>苏黎世分站赛路演顺序抽签 ITCSZ Zurich Finale Pitch Order</h1>
-      <div class="sub">输入或选择姓名，点击“抽取顺序” Please enter or choose your name and click on "Draw"。</div>
+      <h1>在线查分系统</h1>
+      <div class="sub">
+        输入或选择姓名（支持中文/法文重音自动匹配），点击“查询分数”。系统将加载 <b>2 秒</b> 后显示结果。
+      </div>
 
       <div class="search" role="search">
         <input id="nameInput" type="text" placeholder="例如：Zhang San / José García / 王小明" autocomplete="off" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" />
-        <button id="searchBtn" type="button">抽取顺序 Draw</button>
+        <button id="searchBtn" type="button">查询分数</button>
         <div id="dropdown" class="dropdown" role="listbox" aria-label="姓名候选列表"></div>
       </div>
       <div class="hint">提示：键入 2 个以上字符将出现候选；可用 <span class="kbd">↑</span> <span class="kbd">↓</span> 选择，<span class="kbd">Enter</span> 确认。</div>
@@ -120,7 +197,7 @@
     </div>
   </div>
 
-  <!-- 数据文件（在同目录） -->
+  <!-- 数据文件 -->
   <script src="data.js"></script>
   <script>
     // —— 工具：去除重音与全角，统一小写以便无差异匹配 ——
@@ -131,7 +208,7 @@
         String.fromCharCode(ch.charCodeAt(0)-0xFEE0))
       .toLowerCase().trim();
 
-    // 把数据预处理：生成 displayName 与 searchKey
+    // 数据预处理：displayName 与 searchKey
     const people = (window.DATA || []).map(x=>{
       const first = (x.firstName||"").trim();
       const last  = (x.lastName ||"").trim();
@@ -140,10 +217,11 @@
       return {...x, displayName, searchKey};
     });
 
-    // 名字唯一集合（避免重复）
+    // 快速索引
     const byName = new Map();
     people.forEach(p=> byName.set(p.displayName, p));
 
+    // DOM
     const $input   = document.getElementById('nameInput');
     const $drop    = document.getElementById('dropdown');
     const $btn     = document.getElementById('searchBtn');
@@ -159,16 +237,19 @@
 
     function renderDropdown(list){
       $drop.innerHTML = '';
-      if(!list.length){ $drop.classList.remove('visible'); $input.setAttribute('aria-expanded','false'); return; }
+      if(!list.length){
+        $drop.classList.remove('visible');
+        $input.setAttribute('aria-expanded','false');
+        return;
+      }
       list.forEach((p,i)=>{
         const opt = document.createElement('div');
         opt.className = 'opt' + (i===activeIndex ? ' active' : '');
         opt.setAttribute('role','option');
         opt.setAttribute('tabindex','-1');
         opt.textContent = p.displayName;
-        opt.addEventListener('mousedown', e => { // 用 mousedown 避免 blur 提前触发
-          e.preventDefault();
-          choose(p.displayName);
+        opt.addEventListener('mousedown', e => {
+          e.preventDefault(); choose(p.displayName);
         });
         $drop.appendChild(opt);
       });
@@ -179,13 +260,8 @@
     function updateDropdown(){
       const q = strip($input.value);
       activeIndex = -1;
-      if(q.length < 2){
-        renderDropdown([]);
-        return;
-      }
-      currentList = people
-        .filter(p => p.searchKey.includes(q))
-        .slice(0, 50); // 最多 50 条
+      if(q.length < 2){ renderDropdown([]); return; }
+      currentList = people.filter(p => p.searchKey.includes(q)).slice(0, 50);
       renderDropdown(currentList);
     }
 
@@ -196,12 +272,8 @@
       search();
     }
 
-    function showLoader(on){
-      $loader.style.display = on ? 'flex' : 'none';
-    }
-    function showError(msg){
-      $error.textContent = msg || '';
-    }
+    function showLoader(on){ $loader.style.display = on ? 'flex' : 'none'; }
+    function showError(msg){ $error.textContent = msg || ''; }
     function showResult(p){
       if(!p){ $result.style.display='none'; return; }
       $who.innerHTML = '';
@@ -210,7 +282,9 @@
       $who.appendChild(badge(p.displayName));
       if(p.age!==undefined) $who.appendChild(badge(`年龄 ${p.age}`));
 
-      $score.textContent = (p.score!==undefined && p.score!==null) ? `分数：${p.score}` : '未找到分数';
+      const scoreText = (p.score!==undefined && p.score!==null) ? `分数：${p.score}` : '分数尚未公布';
+      $score.textContent = scoreText;
+
       $meta.innerHTML = '';
       if(p.project) $meta.appendChild(badge(`项目：${p.project}`));
       if(p.track)   $meta.appendChild(badge(`Track：${p.track}`));
@@ -223,7 +297,6 @@
       const name = $input.value.trim();
       if(!name){ showError('请先选择或输入姓名'); return; }
 
-      // 精确命中优先；否则尝试无重音模糊匹配的首个结果
       let person = byName.get(name);
       if(!person){
         const key = strip(name);
@@ -231,16 +304,12 @@
       }
       if(!person){ showError('未找到该姓名，请从下拉候选中选择（避免中英文/重音差异）'); return; }
 
-      // 2 秒加载动画
       showLoader(true);
-      $btn.disabled = true;
-      $input.disabled = true;
+      $btn.disabled = true; $input.disabled = true;
       setTimeout(()=>{
         showLoader(false);
         showResult(person);
-        $btn.disabled = false;
-        $input.disabled = false;
-        $input.focus();
+        $btn.disabled = false; $input.disabled = false; $input.focus();
       }, 2000);
     }
 
@@ -248,14 +317,11 @@
     $input.addEventListener('input', updateDropdown);
     $input.addEventListener('focus', updateDropdown);
     $input.addEventListener('blur', ()=>setTimeout(()=>{$drop.classList.remove('visible'); $input.setAttribute('aria-expanded','false');},150));
-
-    // 键盘导航
     $input.addEventListener('keydown', (e)=>{
       const visible = $drop.classList.contains('visible');
       if(visible && (e.key==='ArrowDown' || e.key==='ArrowUp')){
         e.preventDefault();
-        const max = currentList.length-1;
-        if(max<0) return;
+        const max = currentList.length-1; if(max<0) return;
         if(e.key==='ArrowDown') activeIndex = Math.min(max, activeIndex+1);
         else activeIndex = Math.max(0, activeIndex-1);
         Array.from($drop.children).forEach((el,i)=> el.classList.toggle('active', i===activeIndex));
@@ -267,19 +333,10 @@
           search();
         }
       }else if(e.key==='Escape'){
-        $drop.classList.remove('visible');
-        $input.setAttribute('aria-expanded','false');
+        $drop.classList.remove('visible'); $input.setAttribute('aria-expanded','false');
       }
     });
     $btn.addEventListener('click', search);
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
