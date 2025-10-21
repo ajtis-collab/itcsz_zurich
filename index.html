@@ -40,7 +40,7 @@
     /* 顶部左侧 LOGO */
     .logo{
       position:fixed; top:18px; left:22px;
-      width:120px; height:auto;
+      width:270px; height:auto;
       opacity:.9;
       z-index:9999;
       pointer-events:none;     /* 不遮挡点击 */
@@ -49,7 +49,7 @@
     .logo:hover{ opacity:1; }
 
     /* 布局 */
-    .wrap{ width:100%; max-width:980px; }
+    .wrap{ width:100%; max-width:980px; margin-top: 60px; }
     .card{
       background:var(--card);
       border:1px solid var(--border);
@@ -193,7 +193,7 @@
         <div id="meta" class="row" style="margin-top:10px;"></div>
       </div>
 
-      <div class="footer">© 2025 查分系统 · 静态站点（GitHub Pages）</div>
+      <div class="footer">Copyright 2015 - 2025 © China（Shenzhen）Innovation & Entrepreneurship International Competition, All Rights Reserved. 粤ICP备17148765号</div>
     </div>
   </div>
 
@@ -282,7 +282,7 @@
       $who.appendChild(badge(p.displayName));
       if(p.age!==undefined) $who.appendChild(badge(`年龄 ${p.age}`));
 
-      const scoreText = (p.score!==undefined && p.score!==null) ? `分数：${p.score}` : '分数尚未公布';
+      const scoreText = (p.score!==undefined && p.score!==null) ? `路演顺序：${p.score}` : '顺序未抽取';
       $score.textContent = scoreText;
 
       $meta.innerHTML = '';
@@ -340,4 +340,5 @@
   </script>
 </body>
 </html>
+
 
