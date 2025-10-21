@@ -20,9 +20,9 @@ window.DATA = [
   { firstName: "first_name_9",  lastName: "last_name_9",  age: 24, score: 95, project: "project_9",  track: "数字与时尚 - Digit and Fashion" },
 
   // —— Track 4 —— 
-  { firstName: "first_name_10", lastName: "last_name_10", age: 25, score: 82, project: "project_10", track: "高端装备制造 - High-End Equipment Manufacturing" },
-  { firstName: "first_name_11", lastName: "last_name_11", age: 23, score: 87, project: "project_11", track: "高端装备制造 - High-End Equipment Manufacturing" },
-  { firstName: "first_name_12", lastName: "last_name_12", age: 22, score: 79, project: "project_12", track: "高端装备制造 - High-End Equipment Manufacturing" },
+  { firstName: "Florin", lastName: "Baeriswyl", age: 25, score: 82, project: "Smart-Ice 制冰技术保证冰有更好的品质", track: "高端装备制造 - High-End Equipment Manufacturing" },
+  { firstName: "Haijie (海秸)", lastName: "Li (李)", age: 23, score: 87, project: "智能滑雪硬件", track: "高端装备制造 - High-End Equipment Manufacturing" },
+  { firstName: "Siyi (思懿)", lastName: "Zhang (张)", age: 22, score: 79, project: "Eureka! Microscope 便携式显微镜", track: "高端装备制造 - High-End Equipment Manufacturing" },
 
   // —— Track 5 —— 
   { firstName: "first_name_13", lastName: "last_name_13", age: 24, score: 90, project: "project_13", track: "绿色低碳 - Green and Low-Carbon" },
@@ -39,4 +39,5 @@ window.DATA = [
   { firstName: "first_name_20", lastName: "last_name_20", age: 24, score: 94, project: "project_20", track: "海洋经济 - Marine Economy" },
   { firstName: "first_name_21", lastName: "last_name_21", age: 23, score: 86, project: "project_21", track: "海洋经济 - Marine Economy" },
 ];
+
 
