@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>在线查分系统</title>
   <style>
+    .logo {
+    position: fixed;
+    top: 18px;
+    left: 22px;
+    width: 90px;           /* 你可以改成合适的尺寸 */
+    opacity: 0.85;         /* 控制透明度 0~1 */
+    z-index: 100;          /* 确保浮在最上层 */
+    transition: opacity 0.3s ease;
+  }
+  .logo:hover {
+    opacity: 1;            /* 鼠标悬停时更清晰 */
+  }
     :root{
       --bg:#0f172a;        /* 深蓝背景 */
       --card:#111827;      /* 卡片底色 */
@@ -77,6 +89,8 @@
   </style>
 </head>
 <body>
+  <img src="logo.png" alt="logo" class="logo" />
+  <div class="wrap">
   <div class="wrap">
     <div class="card">
       <h1>在线查分系统</h1>
@@ -261,3 +275,4 @@
   </script>
 </body>
 </html>
+
