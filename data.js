@@ -8,9 +8,9 @@ window.DATA = [
   { firstName: "Stefano", lastName: "Grassi", score: 11, project: "Gilytics",                           track: "新一代电子信息 - New-Generation Electronic Information" },
 
   // —— Track 2：生物医药 - Biological Medicine and Health —— 10-12号条目  :contentReference[oaicite:3]{index=3}
-  { firstName: "Ming (明)",   lastName: "Zou (邹)",     score: 8, project: "Next-Gen Diagnostics for CKD Management and New Therapy Development", track: "生物医药 - Biological Medicine and Health" },
-  { firstName: "Changting (昌庭)", lastName: "Li (李)",   score: 1, project: "乳制品蛋白的精密发酵与口服递送",                                           track: "生物医药 - Biological Medicine and Health" },
-  { firstName: "Frédéric",       lastName: "Schuind",score: 21, project: "Spirecut",                                                         track: "生物医药 - Biological Medicine and Health" },
+  { firstName: "Ming (明)",   lastName: "Zou (邹)",     score: 1, project: "Next-Gen Diagnostics for CKD Management and New Therapy Development", track: "生物医药 - Biological Medicine and Health" },
+  { firstName: "Changting (昌庭)", lastName: "Li (李)",   score: 21, project: "乳制品蛋白的精密发酵与口服递送",                                           track: "生物医药 - Biological Medicine and Health" },
+  { firstName: "Frédéric",       lastName: "Schuind",score: 8, project: "Spirecut",                                                         track: "生物医药 - Biological Medicine and Health" },
 
   // —— Track 3：数字与时尚 - Digit and Fashion —— 13-15号条目  :contentReference[oaicite:4]{index=4}
   { firstName: "Alex",   lastName: "Donzelli", score: 6, project: "Optineura AI",                                               track: "数字与时尚 - Digit and Fashion" },
@@ -37,5 +37,6 @@ window.DATA = [
   { firstName: "Liyu (立羽)",   lastName: "Huang (黄)", score: 17, project: "大模型驱动的船舶电力系统自动化设计",                    track: "海洋经济 - Marine Economy" },
   { firstName: "Zipeng (子鹏)", lastName: "Liu (刘)",   score: 18, project: "OceanPulse——海洋塑料预警与溯源平台",                    track: "海洋经济 - Marine Economy" },
 ];
+
 
 
